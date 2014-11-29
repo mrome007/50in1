@@ -5,10 +5,10 @@ public class PlayerController : MonoBehaviour
 {
 	private float Gravity = 20.0f;
 	private float Acceleration = 12.0f;
-	private float Speed = 14.0f;
+	public float Speed = 14.0f;
 
 	private Vector3 AmountToMove;
-	private float CurrentSpeed;
+	public float CurrentSpeed;
 	private float TargetSpeed;
 
 	private PlayerPhysics pp;

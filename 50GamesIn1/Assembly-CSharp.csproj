@@ -46,6 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\BlockProperties.cs" />
+     <Compile Include="Assets\CollisionWith.cs" />
      <Compile Include="Assets\Scripts\InfiniteLevel.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\PlayerPhysics.cs" />
