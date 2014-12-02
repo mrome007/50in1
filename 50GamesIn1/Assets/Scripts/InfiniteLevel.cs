@@ -61,7 +61,7 @@ public class InfiniteLevel : MonoBehaviour
 				GameObject deact = SurfaceList.Dequeue();
 				deact.SetActive(false);
 			}
-			InfiniteGo = counter > 20;
+			InfiniteGo = counter > 100;
 			yield return 0;
 		}
 

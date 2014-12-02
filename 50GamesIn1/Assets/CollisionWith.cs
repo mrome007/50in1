@@ -21,6 +21,25 @@ public class CollisionWith : MonoBehaviour
 			pp.enabled = false;
 			StartCoroutine("StartNewSurfaces");
 		}
+		if(other.gameObject.tag == "Obstacle")
+		{
+			Debug.Log("Hit an obstacle");
+			StartCoroutine(SlowPlayer(10));
+		}
+	}
+
+	IEnumerator SlowPlayer(int frames)
+	{
+		PlayerController pc = gameObject.GetComponent<PlayerController> ();
+		float origSpeed = pc.Speed;
+		pc.Speed = origSpeed - 5.0f;
+		int i = 0;
+		while(i < frames)
+		{
+			i++;
+			yield return 0;
+		}
+		pc.Speed = origSpeed;
 	}
 
 	IEnumerator MovePlayerToCenterFromRight()

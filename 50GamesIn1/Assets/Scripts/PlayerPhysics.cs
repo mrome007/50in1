@@ -29,28 +29,28 @@ public class PlayerPhysics : MonoBehaviour
 		float deltaZ = moveAmount.z;
 
 		Vector3 p = transform.position;
-		if(!Grounded)
-		{
-			for(int i = 0; i < 3; i++)
-			{
-				float dir = Mathf.Sign(deltaY);
-				float x = (p.x + BCenter.x - BSize.x/2) + BSize.x/2 * i; // Left, centre and then rightmost point of collider
-				float y = p.y + BCenter.y + BSize.y/2 * dir;
 
-				ray = new Ray(new Vector3(x,y,0.0f), new Vector3(0,dir,0));
-				Debug.DrawRay(ray.origin,ray.direction);
-				if(Physics.Raycast(ray, out hit, Mathf.Abs(deltaY), Surface))
-				{
-					float dst = Vector3.Distance(ray.origin, hit.point);
-					if (dst > Skin) 
-						deltaY = dst * dir + Skin;
-					else 
-						deltaY = 0;
-					Grounded = true;
-					break;
-				}
+		for(int i = 0; i < 3; i++)
+		{
+			float dir = Mathf.Sign(deltaY);
+			float x = (p.x + BCenter.x - BSize.x/2) + BSize.x/2 * i; // Left, centre and then rightmost point of collider
+			float y = p.y + BCenter.y + BSize.y/2 * dir;
+
+			ray = new Ray(new Vector3(x,y,0.0f), new Vector3(0,dir,0));
+			Debug.DrawRay(ray.origin,ray.direction);
+			bool moveVert = Mathf.Approximately(deltaY,0.0f);
+			if(!moveVert && Physics.Raycast(ray, out hit, Mathf.Abs(deltaY), Surface))
+			{
+				float dst = Vector3.Distance(ray.origin, hit.point);
+				if (dst > Skin) 
+					deltaY = dst * dir + Skin;
+				else 
+					deltaY = 0;
+				Grounded = true;
+				break;
 			}
 		}
+
 		Vector3 finalTransform = new Vector3 (deltaX, deltaY, deltaZ);
 		transform.Translate (finalTransform);
 	}
