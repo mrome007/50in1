@@ -28,18 +28,26 @@ public class BoostOver : MonoBehaviour {
 			ray = new Ray(transform.position,Vector3.down);
 			if(Physics.Raycast(ray,out hit, 3.0f,Obstacles))
 			{
-				Debug.Log("Hit Object while jumping");
-				Debug.Log(hit.collider.gameObject.name);
+				//Debug.Log("Hit Object while jumping");
+				//Debug.Log(hit.collider.gameObject.name);
 				InAirOnce = true;
 				//boosts 15 frames;
 				StartCoroutine(BoostPlayer(20));
+			}
+			else if(Physics.Raycast(ray,out hit, 3.0f))
+			{
+				if(hit.collider.tag == "Obstacle")
+				{
+					Debug.Log("HELLO");
+					StartCoroutine(BoostPlayer(10));
+				}
 			}
 		}
 	}
 
 	IEnumerator BoostPlayer(float frames)
 	{
-		float originalSpeed = PC.Speed;
+		float originalSpeed = PC.OrigSpeed;
 		float originalAcc = PC.Acceleration;
 		PC.Speed = originalSpeed + 3.0f;
 		PC.Acceleration = originalAcc + 5.0f;

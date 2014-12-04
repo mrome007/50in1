@@ -46,15 +46,16 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BlockProperties.cs" />
-     <Compile Include="Assets\BoostOver.cs" />
-     <Compile Include="Assets\CameraMovement.cs" />
-     <Compile Include="Assets\CollisionWith.cs" />
+     <Compile Include="Assets\Scripts\BlockProperties.cs" />
+     <Compile Include="Assets\Scripts\BoostOver.cs" />
+     <Compile Include="Assets\Scripts\CameraMovement.cs" />
+     <Compile Include="Assets\Scripts\CollisionWith.cs" />
      <Compile Include="Assets\Scripts\InfiniteLevel.cs" />
      <Compile Include="Assets\Scripts\MoveEnemy.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\PlayerPhysics.cs" />
-     <Compile Include="Assets\SpawnObstacles.cs" />
+     <Compile Include="Assets\Scripts\SpawnObstacles.cs" />
+     <Compile Include="Assets\Scripts\TheBackGround.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
  </Reference>

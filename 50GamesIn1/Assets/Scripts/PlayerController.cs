@@ -6,17 +6,21 @@ public class PlayerController : MonoBehaviour
 	private float Gravity = 45.0f;
 	public float Acceleration = 12.0f;
 	public float Speed = 12.0f;
+	public float OrigSpeed;
 
 	private Vector3 AmountToMove;
 	public float CurrentSpeed;
 	private float TargetSpeed;
 
 	private PlayerPhysics pp;
+	private int DoubleJump;
 	// Use this for initialization
 	void Start () 
 	{
+		DoubleJump = 0;
 		CurrentSpeed = 0.0f;
 		AmountToMove = new Vector3 ();
+		OrigSpeed = Speed;
 		pp = gameObject.GetComponent<PlayerPhysics> ();
 	}
 	
@@ -29,14 +33,17 @@ public class PlayerController : MonoBehaviour
 		AmountToMove.x = CurrentSpeed;
 		AmountToMove.y -= Gravity * Time.deltaTime;
 		AmountToMove.z = 0.0f;
-		if(pp.Grounded)
+		if(pp.Grounded || DoubleJump < 2)
 		{
 			//AmountToMove.y = 0.0f;
 			if(Input.GetButtonDown("Jump"))
 			{
+				DoubleJump++;
 				pp.Grounded = false;
 				AmountToMove.y = 15.0f;
 			}
+			if(pp.Grounded)
+				DoubleJump = 0;
 		}
 		pp.Move (AmountToMove * Time.deltaTime);
 		//transform.Translate (AmountToMove * Time.deltaTime);

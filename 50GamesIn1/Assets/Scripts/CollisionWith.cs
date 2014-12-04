@@ -14,7 +14,7 @@ public class CollisionWith : MonoBehaviour
 		{
 			countHits++;
 			Block = other.gameObject;
-			Debug.Log("I hit the Transition " + countHits);
+			//Debug.Log("I hit the Transition " + countHits);
 			PlayerController pc = gameObject.GetComponent<PlayerController>();
 			pc.enabled = false;
 			PlayerPhysics pp = gameObject.GetComponent<PlayerPhysics>();
@@ -23,7 +23,7 @@ public class CollisionWith : MonoBehaviour
 		}
 		if(other.gameObject.tag == "Obstacle")
 		{
-			Debug.Log("Hit an obstacle");
+			//Debug.Log("Hit an obstacle");
 			StartCoroutine(SlowPlayer(10));
 		}
 	}
@@ -31,7 +31,9 @@ public class CollisionWith : MonoBehaviour
 	IEnumerator SlowPlayer(int frames)
 	{
 		PlayerController pc = gameObject.GetComponent<PlayerController> ();
-		float origSpeed = pc.Speed;
+		BoostOver bo = gameObject.GetComponent<BoostOver> ();
+		bo.enabled = false;
+		float origSpeed = pc.OrigSpeed;
 		pc.Speed = origSpeed - 5.0f;
 		int i = 0;
 		while(i < frames)
@@ -40,6 +42,7 @@ public class CollisionWith : MonoBehaviour
 			yield return 0;
 		}
 		pc.Speed = origSpeed;
+		bo.enabled = true;
 	}
 
 	IEnumerator MovePlayerToCenterFromRight()
@@ -78,7 +81,7 @@ public class CollisionWith : MonoBehaviour
 		foreach(GameObject value in ifl.SurfaceList)
 			value.SetActive(false);
 		ifl.SurfaceList.Clear ();
-		Debug.Log (ifl.SurfaceList.Count);
+		//Debug.Log (ifl.SurfaceList.Count);
 		PlayerController pc = gameObject.GetComponent<PlayerController>();
 		PlayerPhysics pp = gameObject.GetComponent<PlayerPhysics>();
 		if(bp.ToContinue == "CONTINUE")
